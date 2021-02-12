@@ -77,5 +77,5 @@ Session Affinity:  None
 Events:            <none>
 ```
 
-this IP address will be used when initializing the mongodb tables.
+in this case `172.25.165.159`, will be used when initializing the mongodb tables.
  
