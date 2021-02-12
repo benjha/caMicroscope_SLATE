@@ -42,14 +42,14 @@ There are two caMicroscope services related to MongoDB, `ca-mongo` and `ca-idx`.
 and `ca-idx` initialize it. 
 
 In terms of Slate, `ca-mongo` is an stateful set paired with a service so as to be accessible accross Slate nodes.
-`ca-mongo` will create will host the database in
+`ca-mongo` creates the database in
 
 ```
 /gpfs/alpine/proj-shared/gen150/caMicroscope/mongodb
 
 ``` 
 
-'ca-idx` is a job that calls the configuration scripts available in
+On the other hand, 'ca-idx` is a job that calls the configuration scripts available in
 
 https://github.com/camicroscope/Distro/tree/master/config
 
