@@ -10,7 +10,7 @@ https://docs.olcf.ornl.gov/services_and_applications/slate/overview.html#what-is
 
 ## Preliminaries
 
-caMicroscope uses docker-compose to start its back-end and front-end services. Details about
+caMicroscope uses `docker-compose` to start its back-end and front-end services. Details about
 caMicroscope deployment is available in the next link.
 
 https://github.com/camicroscope/Distro
@@ -26,3 +26,5 @@ Services' volumes are  mounted in
 ```
 /gpfs/alpine/proj-shared/gen150/caMicroscope 
 ``` 
+
+Services: `mongodb`, `iipimage`, `SlideLoader`, `caracal`
