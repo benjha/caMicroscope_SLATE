@@ -1,0 +1,47 @@
+kind: StatefulSet
+apiVersion: apps/v1
+metadata:
+  creationTimestamp: null
+  annotations:
+    ccs.ornl.gov/fs: olcf  
+  labels:
+    app: ca-mongo
+  name: ca-mongo
+spec:
+  serviceName: "ca-mongo-service"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ca-mongo
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: ca-mongo
+      annotations:
+        ccs.ornl.gov/fs: olcf
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+        - resources:
+            limits:
+              cpu: '4'
+              memory: 4Gi
+            requests:
+              cpu: '4'
+              memory: 4Gi
+          stdin: true
+          image: mongo:3.6.18-xenial
+          name: ca-mongo
+          args: ['mongod','--dbpath','/gpfs/alpine/proj-shared/gen150/caMicroscope/mongodb']
+          ports:
+            - name: ca-mongo-port
+              containerPort: 27017
+              protocol: TCP
+          env:
+            - name: MONGO_INITDB_ROOT_USERNAME
+              value: root
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              value: password
+      hostname: ca-mongo
+status: {}
