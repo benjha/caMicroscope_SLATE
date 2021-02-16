@@ -1,0 +1,27 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  annotations:
+    ccs.ornl.gov/fs: olcf
+  name: ca-idx
+  labels:
+    job: ca-idx
+    job-name: ca-idx
+spec:
+  selector: {}
+  backoffLimit: 3
+  template:
+    metadata:
+      name: ca-idx
+    spec:
+      containers:
+        - name: ca-idx
+          image: mongo:3.6.18-xenial
+          command: ['/bin/sh','-c']
+          args: ['cd $(CA_MICROSCOPE_DISTRO_ROOT) && ./config/run_idx.sh']
+          env:
+          - name: CA_MICROSCOPE_DISTRO_ROOT
+            value: /gpfs/alpine/proj-shared/gen150/caMicroscope/Distro
+          - name: CA_MONGO_HOST
+            value: 172.25.165.159
+      restartPolicy: Never

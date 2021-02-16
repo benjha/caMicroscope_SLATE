@@ -40,8 +40,8 @@ spec:
               protocol: TCP
           env:
             - name: MONGO_INITDB_ROOT_USERNAME
-              value: root
+              value: ' '
             - name: MONGO_INITDB_ROOT_PASSWORD
-              value: password
+              value: ' '
       hostname: ca-mongo
 status: {}
