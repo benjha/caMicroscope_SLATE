@@ -1,0 +1,51 @@
+version: '2'
+
+services:
+  mongo:
+    image: mongo:3.6.18-xenial
+    container_name: ca-mongo
+    volumes:
+      - ./db:/data/db
+  idxMongo:
+    image: mongo:3.6.18-xenial
+    container_name: ca-idx
+    links:
+      - mongo
+    volumes:
+      - ./config:/config
+    command: bash /config/run_idx.sh
+    depends_on:
+      - mongo
+  back:
+    build:
+      context: "https://github.com/camicroscope/caracal.git#develop"
+      args:
+        viewer: "develop"
+        fork: "camicroscope"
+    depends_on:
+      - "mongo"
+    ports:
+      - "4010:4010"
+    container_name: ca-back
+    volumes:
+      - ./config/login.html:/src/static/login.html
+      - ./jwt_keys/:/src/keys/
+      - ./config/routes.json:/src/routes.json
+    environment:
+      JWK_URL: "https://www.googleapis.com/oauth2/v3/certs"
+      IIP_PATH: "http://ca-iip:8080/fcgi-bin/iipsrv.fcgi"
+      MONGO_URI: "mongodb://ca-mongo"
+      DISABLE_SEC: "true"
+      ALLOW_PUBLIC: "true"
+  iip:
+    build: "https://github.com/camicroscope/iipimage.git#develop"
+    container_name: ca-iip
+    restart: unless-stopped
+    volumes:
+      - ./images/:/images/
+  loader:
+    build: "https://github.com/camicroscope/SlideLoader.git#develop"
+    container_name: ca-load
+    volumes:
+      - ./images/:/images/
+      - ./cloud-upload-apis/:/cloud-upload-apis/
