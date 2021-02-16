@@ -38,6 +38,8 @@ oc project gen150-app
 
 # MongoDB
 
+## ca-mongo
+
 There are two caMicroscope services related to MongoDB, `ca-mongo` and `ca-idx`. `ca-mongo` hosts the database
 and `ca-idx` initialize it. 
 
@@ -46,12 +48,7 @@ In terms of Slate, `ca-mongo` is an stateful set paired with a service so as to 
 
 ```
 /gpfs/alpine/proj-shared/gen150/caMicroscope/mongodb
-
 ``` 
-
-On the other hand, 'ca-idx` is a job that calls the configuration scripts available in
-
-https://github.com/camicroscope/Distro/tree/master/config
 
 To create the `ca-mongo` service and stateful set use the next commands:
 
@@ -78,4 +75,22 @@ Events:            <none>
 ```
 
 in this case `172.25.165.159`, will be used when initializing the mongodb tables.
- 
+
+## ca-idx
+
+`ca-idx` is a job that calls the configuration scripts available in
+
+https://github.com/benjha/caMicroscope_SLATE/tree/main/Distro
+
+These scripts where updated from caMicroscope Distro repository to support Slate.
+
+To create the `ca-idx` job use the next command:
+
+```
+oc create -f idx-job.yaml
+```
+
+From `idx-job.yaml` note `CA_MICROSCOPE_DISTRO_ROOT` and `CA_MONGO_HOST` environment variables. In particular,
+CA_MONGO_HOST should be set to `172.25.165.159` which is the IP address of 'ca-mongo-service'.
+
+
