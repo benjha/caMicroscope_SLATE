@@ -82,7 +82,7 @@ in this case `172.25.165.159`, will be used when initializing the mongodb tables
 
 https://github.com/benjha/caMicroscope_SLATE/tree/main/Distro
 
-These scripts where updated from caMicroscope Distro repository to support Slate.
+These scripts where updated from caMicroscope's Distro repository to support Slate.
 
 To create the `ca-idx` job use the next command:
 
@@ -91,6 +91,6 @@ oc create -f idx-job.yaml
 ```
 
 From `idx-job.yaml` note `CA_MICROSCOPE_DISTRO_ROOT` and `CA_MONGO_HOST` environment variables. In particular,
-CA_MONGO_HOST should be set to `172.25.165.159` which is the IP address of 'ca-mongo-service'.
+`CA_MONGO_HOST` should be set to `172.25.165.159` which is the IP address of 'ca-mongo-service'.
 
-
+# ca-back

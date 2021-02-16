@@ -1,0 +1,28 @@
+os: linux
+dist: xenial
+language: node_js
+node_js:
+   - "14"
+install:
+    - npm install
+    - npm install -g mocha
+
+env:
+  - DISABLE_SEC=true
+
+stages:
+  - name: tests
+  - name: lintjs
+  - name: linthtml
+
+services:
+    - mongodb
+
+jobs:
+  include:
+    - stage: tests
+      name: Unit Tests
+      script: npm run-script test
+    - stage: lintjs
+      name: "JS Code Style Check"
+      script: npm run-script lint
