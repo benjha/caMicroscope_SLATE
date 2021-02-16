@@ -1,9 +1,3 @@
-[submodule "caracal/Caracal"]
-	path = caracal/Caracal
-	url = https://github.com/camicroscope/Caracal.git
 [submodule "Caracal"]
 	path = Caracal
 	url = https://github.com/camicroscope/Caracal.git
-[submodule "Distro"]
-	path = Distro
-	url = https://github.com/camicroscope/Distro.git
