@@ -11,11 +11,11 @@ https://docs.olcf.ornl.gov/services_and_applications/slate/overview.html#what-is
 ## Preliminaries
 
 caMicroscope uses `docker-compose` to start its back-end and front-end services. Details about
-caMicroscope deployment is available in the next link.
+caMicroscope deployment is available in the next link:
 
 https://github.com/camicroscope/Distro
 
-This repository includes the caMicroscope deployment process in Slate, a k8s cluster.
+This repository includes the caMicroscope v3.8.4 deployment process in Slate, a k8s cluster.
 
 The caMicroscope service naming conventions follows those denoted in the next docker-compose specification: 
 
@@ -91,6 +91,41 @@ oc create -f idx-job.yaml
 ```
 
 From `idx-job.yaml` note `CA_MICROSCOPE_DISTRO_ROOT` and `CA_MONGO_HOST` environment variables. In particular,
-`CA_MONGO_HOST` should be set to `172.25.165.159` which is the IP address of 'ca-mongo-service'.
+`CA_MONGO_HOST` should be set to `172.25.165.159` which is the IP address of `ca-mongo-service`.
 
 # ca-back
+
+The Docker recipe from 
+
+https://github.com/camicroscope/Caracal/blob/master/Dockerfile
+
+is used to build a Docker image on Slate using the next command:
+
+```
+oc new-build https://github.com/camicroscope/caracal.git#v3.8.4 --build-arg "viewer=v3.8.4"
+```
+
+to verify that the caracal image is available on Slate type:
+
+```
+oc get imagestream
+```
+
+this is a sample of the output:
+
+```
+NAME           IMAGE REPOSITORY                                            TAGS              UPDATED
+...
+caracal        registry.apps.marble.ccs.ornl.gov/gen150-app/caracal                          
+...
+```
+
+The `back-deployment.yaml` specification configures the ca-back deployment. Environment variables of the container
+are based on those defined in:
+
+https://github.com/camicroscope/Distro/blob/v3.8.4/caMicroscope.yml
+
+note `DISABLE_SEC` and `ALLOW_PUBLIC` are set to `true` given that Slate provides authentification services. Also note
+`MONGO_URI` is set to the IP address of `ca-mongo-service` and `IIP_PATH`  is set to the IP address of `ca-iip-service`.
+
+
