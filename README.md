@@ -93,7 +93,11 @@ oc create -f idx-job.yaml
 From `idx-job.yaml` note `CA_MICROSCOPE_DISTRO_ROOT` and `CA_MONGO_HOST` environment variables. In particular,
 `CA_MONGO_HOST` should be set to `172.25.165.159` which is the IP address of `ca-mongo-service`.
 
-# ca-back
+# IIPImage (ca-iip)
+
+# SliderLoader (ca-load)
+
+# Caracal (ca-back)
 
 The Docker recipe from 
 
