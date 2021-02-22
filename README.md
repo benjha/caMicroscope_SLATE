@@ -95,15 +95,25 @@ From `idx-job.yaml` note `CA_MICROSCOPE_DISTRO_ROOT` and `CA_MONGO_HOST` environ
 
 # IIPImage (ca-iip)
 
+The Docker recipe from
+
+https://github.com/camicroscope/iipImage/blob/v3.8.4/Dockerfile
+
+is used to build a Docker image of `ca-iip` on Slate using the next commmand:
+
+```
+oc new-build https://github.com/camicroscope/iipImage.git#v3.8.4
+```
+
 # SliderLoader (ca-load)
 
 # Caracal (ca-back)
 
 The Docker recipe from 
 
-https://github.com/camicroscope/Caracal/blob/master/Dockerfile
+https://github.com/camicroscope/Caracal/blob/v3.8.4/Dockerfile
 
-is used to build a Docker image on Slate using the next command:
+is used to build a Docker image of `ca-back` on Slate using the next command:
 
 ```
 oc new-build https://github.com/camicroscope/caracal.git#v3.8.4 --build-arg "viewer=v3.8.4"
