@@ -97,12 +97,12 @@ From `idx-job.yaml` note `CA_MICROSCOPE_DISTRO_ROOT` and `CA_MONGO_HOST` environ
 
 The Docker recipe from
 
-https://github.com/camicroscope/iipImage/blob/v3.8.4/Dockerfile
+https://github.com/benjha/iipImage/tree/v3.8.4_Slate
 
 is used to build a Docker image of `ca-iip` on Slate using the next commmand:
 
 ```
-oc new-build https://github.com/camicroscope/iipImage.git#v3.8.4
+oc new-build https://github.com/benjha/iipImage.git#v3.8.4_Slate
 ```
 
 # SliderLoader (ca-load)
