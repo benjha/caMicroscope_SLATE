@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    ccs.ornl.gov/fs: olcf
+  labels:
+    app: ca-iip
+  name: ca-iip
+spec:
+  selector:
+    matchLabels:
+      app: ca-iip
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: ca-iip
+    spec:
+      containers:
+        - name: ca-iip
+          image: image-registry.openshift-image-registry.svc:5000/gen150-app/iipimage
+          command: ['/bin/sh','-c']
+          args: ['./run_iipsrv.sh'] 
+          env:
+            - name: CA_IIP_ROOT
+              value: /gpfs/alpine/proj-shared/gen150/caMicroscope/apache2
+          ports:
+            - name: ca-iip-apache
+              containerPort: 80
+            - name: ca-iip-port
+              containerPort: 8080
+            - name: ca-iip-utils
+              containerPort: 8443
+          resources:
+            limits:
+              cpu: '4'
+              memory: 8Gi
+            requests:
+              cpu: '4'
+              memory: 8Gi
+          stdin: true
+          tty: true
+      restartPolicy: Always

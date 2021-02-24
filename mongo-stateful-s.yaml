@@ -33,12 +33,14 @@ spec:
           stdin: true
           image: mongo:3.6.18-xenial
           name: ca-mongo
-          args: ['mongod','--dbpath','/gpfs/alpine/proj-shared/gen150/caMicroscope/mongodb']
+          args: ['mongod','--dbpath','$(CA_MONGO_ROOT)']
           ports:
             - name: ca-mongo-port
               containerPort: 27017
               protocol: TCP
           env:
+            - name: CA_MONGO_ROOT
+              value: /gpfs/alpine/proj-shared/gen150/caMicroscope/mongodb
             - name: MONGO_INITDB_ROOT_USERNAME
               value: ' '
             - name: MONGO_INITDB_ROOT_PASSWORD

@@ -44,7 +44,7 @@ There are two caMicroscope services related to MongoDB, `ca-mongo` and `ca-idx`.
 and `ca-idx` initialize it. 
 
 In terms of Slate, `ca-mongo` is an stateful set paired with a service so as to be accessible accross Slate nodes.
-`ca-mongo` creates the database in
+From `mongo-stateful-s.yaml` note that  `ca-mongo` creates the database in `CA_MONGO_ROOT` that points to
 
 ```
 /gpfs/alpine/proj-shared/gen150/caMicroscope/mongodb
@@ -103,6 +103,18 @@ is used to build a Docker image of `ca-iip` on Slate using the next commmand:
 
 ```
 oc new-build https://github.com/benjha/iipImage.git#v3.8.4_Slate
+```
+
+To create the `ca-iip` deployment use the next command:
+
+```
+oc create -f iip-deployment.yaml
+```
+
+From `iip-deployment.yaml` note log data from apache2 and iipsrv is stored in `CA_IIP_ROOT` that points to
+
+```
+/gpfs/alpine/gen150/proj-shared/caMicroscope/apache2
 ```
 
 # SliderLoader (ca-load)
