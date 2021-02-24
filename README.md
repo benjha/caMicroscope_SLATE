@@ -74,7 +74,7 @@ Session Affinity:  None
 Events:            <none>
 ```
 
-in this case `172.25.165.159`, will be used when initializing the mongodb tables.
+in this case `172.25.165.159`, will be used when initializing the mongodb tables. Note this services only exposes IP Address within Slate.
 
 ## ca-idx
 
@@ -116,6 +116,39 @@ From `iip-deployment.yaml` note log data from apache2 and iipsrv is stored in `C
 ```
 /gpfs/alpine/gen150/proj-shared/caMicroscope/apache2
 ```
+
+Apache2 and iipsrv ports are exposed by `ca-iip` service specification defined in `iip-service.yaml`. To create
+the service use the next command:
+
+```
+oc create -f iip-service.yaml
+```
+
+run `oc describe service ca-iip-service` to get the IP address of the node that is running the pod of the ca-iip deployment:
+
+```
+Name:              ca-iip-service
+Namespace:         gen150-app
+Labels:            app=ca-iip
+Annotations:       <none>
+Selector:          app=ca-iip
+Type:              ClusterIP
+IP:           -->  172.25.129.140  <--
+Port:              iip-apache-service  80/TCP
+TargetPort:        ca-iip-apache/TCP
+Endpoints:         10.34.42.154:80
+Port:              iip-port-service  8080/TCP
+TargetPort:        ca-iip-port/TCP
+Endpoints:         10.34.42.154:8080
+Port:              iip-port-utils  8443/TCP
+TargetPort:        ca-iip-utils/TCP
+Endpoints:         10.34.42.154:8443
+Session Affinity:  None
+Events:            <none>
+```
+
+in this case `172.25.129.140`, will be used for coordination. Note this services only exposes IP Address within Slate.
+
 
 # SliderLoader (ca-load)
 
