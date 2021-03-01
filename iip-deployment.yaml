@@ -39,5 +39,5 @@ spec:
               cpu: '4'
               memory: 8Gi
           stdin: true
-          tty: true
       restartPolicy: Always
+status: {}

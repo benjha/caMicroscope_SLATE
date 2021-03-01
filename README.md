@@ -74,7 +74,7 @@ Session Affinity:  None
 Events:            <none>
 ```
 
-in this case `172.25.165.159`, will be used when initializing the mongodb tables. Note this services only exposes IP Address within Slate.
+in this case `172.25.165.159`, will be used when initializing the mongodb tables. Note this service only exposes the IP Address within Slate.
 
 ## ca-idx
 
@@ -147,7 +147,7 @@ Session Affinity:  None
 Events:            <none>
 ```
 
-in this case `172.25.129.140`, will be used for coordination. Note this services only exposes IP Address within Slate.
+in this case `172.25.129.140`, will be used for coordination. Note this service only exposes the IP Address within Slate.
 
 
 # SliderLoader (ca-load)

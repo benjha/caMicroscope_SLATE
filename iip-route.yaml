@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Route
+metadata:
+  name: iip-route
+  labels:
+    app: ca-iip
+    ccs.ornl.gov/externalRoute: 'true'
+  annotations:
+    ccs.ornl.gov/requireAuth: 'true'
+    openshift.io/host.generated: 'true'
+spec:
+  host: ca-iip.apps.marble.ccs.ornl.gov
+  to:
+    kind: Service
+    name: ca-iip-service
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+  port:
+    targetPort: ca-iip-apache
+  wildcardPolicy: None

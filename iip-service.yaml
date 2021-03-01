@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ca-iip-service
+  labels:
+    app: ca-iip
+spec:
+  selector:
+    app: ca-iip
+  ports:
+    - name: iip-apache-service
+      port: 80
+      protocol: TCP
+      targetPort: ca-iip-apache
+    - name: iip-port-service
+      port: 8080
+      targetPort: ca-iip-port
+    - name: iip-port-utils
+      port: 8443
+      targetPort: ca-iip-utils
